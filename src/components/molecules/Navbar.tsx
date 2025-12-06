@@ -16,7 +16,7 @@ export function Navbar(props: React.HTMLAttributes<HTMLElement>) {
       <div className="shrink-0">
         <img src={serviceLogo} alt="Service Logo" />
       </div>
-      <div className="navigation-links flex flex-wrap gap-4 md:gap-6">
+      <div className="navigation-links flex flex-wrap gap-4 md:gap-6 max-md:hidden">
         <div className="whitespace-nowrap">
           <Link active href="#">
             Strona Główna
