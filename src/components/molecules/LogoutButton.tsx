@@ -1,13 +1,15 @@
 import { useAppDispatch } from "@/redux/hooks";
 import { Btn } from "../atoms/Button";
 import { logout } from "@/redux/session/sessionSlice";
+import UserIcon from "@/assets/user.svg";
 
 export function LogoutButton() {
   const dispatch = useAppDispatch();
 
   return (
-    <Btn variant="outline" onClick={() => dispatch(logout())}>
-      Logout
+    <Btn className="gap-2.5 px-5!" variant="outline" onClick={() => dispatch(logout())}>
+      <img src={UserIcon} width={25} alt="User icon" />
+      Konto
     </Btn>
   );
 }
