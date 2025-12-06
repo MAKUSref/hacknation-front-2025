@@ -1,7 +1,9 @@
+import { useId } from "react";
 import { useParams } from "react-router";
 import { Collapse, type CollapseProps } from "antd";
 import { Timeline } from "@/components/molecules/Timeline";
 import bell from "@/assets/bell.svg";
+import { useGetLegislationQuery } from "@/api/baseApi/legislation/legislationApi";
 
 const timelineData = [
   {
@@ -51,30 +53,38 @@ const items: CollapseProps["items"] = [
 ];
 
 export const ProcessPage = () => {
+  const keyId = useId();
+
   const { id } = useParams<{ id: string }>();
+
+  const { data: legislation } = useGetLegislationQuery(id || "");
+
+  if (!legislation) {
+    return <div>Ładowanie danych legislacyjnych...</div>;
+  }
 
   return (
     <section className="flex gap-10 p-6 mt-10">
       <section className="left w-3/4">
         <section className="info">
           <p className="text-sm">Numer wykazu: {id}</p>
-          <p className="text-sm">Wnioskodawca: Minister Edukacji</p>
-          <p className="text-sm">Data utworzenia: 24-07-2025</p>
-          <h3 className="font-bold my-10">
-            Kursy reedukacyjne i obowiązkowe badania kierowców.
-          </h3>
+          <p className="text-sm">Wnioskodawca: {legislation.applicant}</p>
+          <p className="text-sm">
+            Data utworzenia:{" "}
+            {new Date(legislation.createdAt).toLocaleDateString()}
+          </p>
+          <h3 className="font-bold my-10">{legislation.title}</h3>
           <p className="text-sm text-gray-400">
-            <span className="font-bold">Pełen tytuł</span>: Projekt
-            rozporządzenia Ministra Zdrowia w sprawie kursu reedukacyjnego w
-            zakresie problematyki przeciwalkoholowej i przeciwdziałania
-            narkomanii oraz szczegółowych warunków i trybu kierowania na badania
-            lekarskie lub badania psychologiczne w zakresie psychologii
-            transportu
+            <span className="font-bold">Pełen tytuł</span>:{" "}
+            {legislation.description}
           </p>
         </section>
         <section className="badges flex flex-row gap-4 my-10">
-          <div className="bg-gray-200 p-2 rounded-lg">Ochrona zdrowia</div>
-          <div className="bg-gray-200 p-2 rounded-lg">Ruch drogowy</div>
+          {legislation.tags?.map((tag) => (
+            <div className="bg-gray-200 p-2 rounded-lg" key={`${keyId}-${tag}`}>
+              {tag}
+            </div>
+          ))}
         </section>
         <section className="my-12">
           <Collapse accordion ghost items={items} defaultActiveKey={["1"]} />
