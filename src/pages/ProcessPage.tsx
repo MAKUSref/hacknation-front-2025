@@ -1,8 +1,32 @@
 import { useParams } from "react-router";
+import { Collapse, type CollapseProps } from "antd";
 import bell from "@/assets/bell.svg";
+
+const text = `
+  test
+`;
+
+const items: CollapseProps["items"] = [
+  {
+    key: "1",
+    label: <p className="font-bold text-lg">Jaki problem jest rozwiązywany?</p>,
+    children: <p>{text}</p>,
+  },
+  {
+    key: "2",
+    label: (
+      <p className="font-bold text-lg">
+        Rekomendowane rozwiązanie, w tym planowane narzędzia interwencji i
+        oczekiwany efekt
+      </p>
+    ),
+    children: <p>{text}</p>,
+  },
+];
 
 export const ProcessPage = () => {
   const { id } = useParams<{ id: string }>();
+
   return (
     <section className="flex gap-10 p-6 mt-10">
       <section className="left w-3/4">
@@ -26,6 +50,15 @@ export const ProcessPage = () => {
           <div className="bg-gray-200 p-2 rounded-lg">Ochrona zdrowia</div>
           <div className="bg-gray-200 p-2 rounded-lg">Ruch drogowy</div>
         </section>
+        <section className="my-12">
+          <Collapse accordion ghost items={items} defaultActiveKey={["1"]} />
+        </section>
+        <section>
+          <p className="text-lg mb-2">Załączniki do projektu:</p>
+          <div className="rounded-4xl bg-gray-300 w-75 h-4"></div>
+          <div className="rounded-4xl bg-gray-300 w-75 h-4 my-3"></div>
+          <div className="rounded-4xl bg-gray-300 w-75 h-4"></div>
+        </section>
       </section>
       <section className="right w-100">
         <button className="w-100 bg-[#345865] rounded-4xl p-3 text-white font-bold hover:cursor-pointer flex align-middle gap-3">
@@ -46,7 +79,7 @@ export const ProcessPage = () => {
             </div>
           </div>
           <textarea
-            className="border border-black border-2 rounded-xl p-5 mt-5"
+            className="border-black border-2 rounded-xl p-5 mt-5"
             placeholder="Co sądzisz o projekcie?"
             rows={8}
           ></textarea>
