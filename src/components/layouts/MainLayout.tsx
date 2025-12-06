@@ -7,20 +7,26 @@ import "dayjs/locale/pl";
 import dayjs from "dayjs";
 import { ChooseFieldsModalProvider } from "@/contexts/ChooseFieldsModalContext";
 import { Footer } from "@/components/molecules/Footer";
+import { ParamsProvider } from "@/providers/ParamsProvider";
+import { NuqsAdapter } from "nuqs/adapters/react";
 
 dayjs.locale("pl");
 
 export function MainLayout() {
   return (
-    <ConfigProvider theme={theme}>
-      <Provider store={store}>
-        <ChooseFieldsModalProvider>
-          <div className="container">
-            <Outlet />
-          </div>
-          <Footer />
-        </ChooseFieldsModalProvider>
-      </Provider>
-    </ConfigProvider>
+    <NuqsAdapter>
+      <ConfigProvider theme={theme}>
+        <Provider store={store}>
+          <ChooseFieldsModalProvider>
+            <ParamsProvider>
+              <div className="container">
+                <Outlet />
+              </div>
+              <Footer />
+            </ParamsProvider>
+          </ChooseFieldsModalProvider>
+        </Provider>
+      </ConfigProvider>
+    </NuqsAdapter>
   );
 }

@@ -4,6 +4,7 @@
 @theme {
   --font-poppins: 'Poppins', sans-serif;
   --color-primary: #345865;
+  --color-secondary: #F54D58;
 }
 
 body {

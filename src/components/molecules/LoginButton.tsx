@@ -3,19 +3,21 @@ import { useLoginMutation } from "@/api/baseApi/auth/authApi";
 import { useAppDispatch } from "@/redux/hooks";
 import { setAccessToken } from "@/redux/session/sessionSlice";
 import { Btn } from "../atoms/Button";
-import { useFieldsModal } from "@/contexts/ChooseFieldsModalContext";
+import { useNavigate } from "react-router";
+import { PATHS } from "@/router/paths";
+import { Spin } from "antd";
 
 export function LoginButton() {
-  const [login] = useLoginMutation();
+  const [login, { isLoading }] = useLoginMutation();
   const dispatch = useAppDispatch();
-  const { setOn } = useFieldsModal();
+  const navigate = useNavigate();
 
   const handleLogin = () => {
     login({ email: "test", password: "test" })
       .unwrap()
       .then((response) => {
-        setOn();
         dispatch(setAccessToken(response.accessToken));
+        navigate(PATHS.EPUAP_LOGIN);
       });
   };
 
@@ -27,6 +29,7 @@ export function LoginButton() {
     >
       <img width={35} src={emblemIcon} alt="Emblem icon" />
       <span>Zaloguj się</span>
+      {isLoading && <Spin />}
     </Btn>
   );
 }
