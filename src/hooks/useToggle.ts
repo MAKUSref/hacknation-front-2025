@@ -17,3 +17,5 @@ export const useToggle = (initialValue: boolean = false) => {
     setOff,
   } as const;
 }
+
+export type ToggleValues = ReturnType<typeof useToggle>;

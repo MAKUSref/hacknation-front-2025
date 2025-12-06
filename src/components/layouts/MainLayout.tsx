@@ -5,6 +5,7 @@ import { ConfigProvider } from "antd";
 import { theme } from "@/antdTheme";
 import "dayjs/locale/pl";
 import dayjs from "dayjs";
+import { ChooseFieldsModalProvider } from "@/contexts/ChooseFieldsModalContext";
 
 dayjs.locale("pl");
 
@@ -12,9 +13,11 @@ export function MainLayout() {
   return (
     <ConfigProvider theme={theme}>
       <Provider store={store}>
-        <div className="container">
-          <Outlet />
-        </div>
+        <ChooseFieldsModalProvider>
+          <div className="container">
+            <Outlet />
+          </div>
+        </ChooseFieldsModalProvider>
       </Provider>
     </ConfigProvider>
   );
