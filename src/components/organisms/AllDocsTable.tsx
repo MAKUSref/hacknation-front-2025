@@ -2,13 +2,16 @@ import {
   useGetLegislationListQuery,
   useGetLegislationStepsQuery,
 } from "@/api/baseApi/legislation/legislationApi";
-import { Table } from "antd";
+import { Badge, Table } from "antd";
 import { useNavigate } from "react-router";
 import { Tag } from "../atoms/Tag";
 import dayjs from "dayjs";
 import { PATHS } from "@/router/paths";
 import { mapTitle } from "@/pages/legislative/ProcessPage";
-import type { ILegislationProject } from "@/api/baseApi/legislation/types";
+import {
+  StepPlace,
+  type ILegislationProject,
+} from "@/api/baseApi/legislation/types";
 
 type LegislationWithId = { _id?: string; id?: string };
 
@@ -67,7 +70,18 @@ export function AllDocsTable() {
             categories: item.tags?.join(", ") || "",
             applicant: item.applicant,
             modification: dayjs(item.updatedAt).format("DD.MM.YYYY"),
-            status: <Tag>{mapItem(item).at(-1)?.type || ""}</Tag>,
+            status: (
+              <>
+                <Badge
+                  color={
+                    mapItem(item).at(-1)?.place === StepPlace.PRE_SEJM
+                      ? "#345865"
+                      : "#F54D58"
+                  }
+                  text={mapItem(item).at(-1)?.type || ""}
+                />
+              </>
+            ),
           };
         }) || []
       }
