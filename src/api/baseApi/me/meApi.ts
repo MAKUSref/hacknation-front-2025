@@ -6,6 +6,7 @@ export const meApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getMyWatchProcesses: builder.query<ILegislationProject[], void>({
       query: () => API_ROUTES.MY_WATCH_LIST,
+      providesTags: ["watch-list"],
     }),
     addProjectToMyWatchList: builder.mutation<
       ILegislationProject,
@@ -16,6 +17,7 @@ export const meApi = baseApi.injectEndpoints({
         method: "POST",
         body: { projectId },
       }),
+      invalidatesTags: ["watch-list"],
     }),
     removeProjectFromMyWatchList: builder.mutation<void, { projectId: string }>(
       {
@@ -24,6 +26,7 @@ export const meApi = baseApi.injectEndpoints({
           method: "DELETE",
           body: { projectId },
         }),
+        invalidatesTags: ["watch-list"],
       }
     ),
   }),

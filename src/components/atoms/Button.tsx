@@ -1,20 +1,30 @@
 import clsx from "clsx";
 import type { ButtonHTMLAttributes } from "react";
 
-type BtnVariants = "primary" | "secondary" | "outline" | "text";
+type BtnVariants =
+  | "primary"
+  | "secondary"
+  | "outline"
+  | "text"
+  | "outline-primary";
 
 const BTN_VARIANT_CLASSES: Record<BtnVariants, string> = {
   primary: "bg-primary text-white",
   secondary: "bg-secondary text-white",
   text: "bg-transparent text-black hover:bg-[#f3f3f3]",
   outline: "bg-white border-2 border-black text-black",
+  "outline-primary": "bg-white border-2 border-primary text-primary",
 };
 
 type BtnProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: BtnVariants;
 };
 
-export const Btn = ({ variant = "primary", className, ...btnProps }: BtnProps) => {
+export const Btn = ({
+  variant = "primary",
+  className,
+  ...btnProps
+}: BtnProps) => {
   return (
     <button
       {...btnProps}

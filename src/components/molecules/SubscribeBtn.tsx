@@ -28,8 +28,9 @@ export const SubscribeBtn = ({ processId }: { processId: string }) => {
 
   return (
     <Btn
-      className="w-100 justify-start gap-3 pl-0 pr-2"
+      className="w-100 justify-start gap-3 pl-0 pr-2 "
       onClick={handleSubscribeProject}
+      variant={isProcessWatched ? "outline-primary" : "primary"}
     >
       <img
         className="ml-5"
@@ -37,6 +38,7 @@ export const SubscribeBtn = ({ processId }: { processId: string }) => {
         src={isProcessWatched ? bellActive : bell}
         alt="Bell icon"
       />
+
       {isProcessWatched
         ? "Subskrybujesz ten dokument"
         : "Bądź na bieżąco z pracami"}
