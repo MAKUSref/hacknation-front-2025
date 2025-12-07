@@ -54,7 +54,7 @@ export enum LegislativeProcessStep {
 }
 
 export interface ILegislationStep {
-  _id?: string;
+  _id: string;
   projectId?: string;
   type: LegislativeProcessStep;
   isActive: boolean;
@@ -63,6 +63,7 @@ export interface ILegislationStep {
 }
 
 export interface ILegislationProject extends Document {
+  _id: string;
   title: string;
   applicant: string;
   description: string;

@@ -4,25 +4,25 @@ import type { ILegislationProject } from "@/api/baseApi/legislation/types";
 
 export const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    getUserWatchList: builder.query<ILegislationProject[], { userId: string }>({
-      query: ({ userId }) => API_ROUTES.WATCH_LIST(userId),
+    getUserWatchProcesses: builder.query<ILegislationProject[], void>({
+      query: () => API_ROUTES.MY_WATCH_LIST,
     }),
     addProjectToUserWatchList: builder.mutation<
       ILegislationProject,
-      { userId: string; projectId: string }
+      { projectId: string }
     >({
-      query: ({ userId, projectId }) => ({
-        url: API_ROUTES.WATCH_LIST(userId),
+      query: ({ projectId }) => ({
+        url: API_ROUTES.MY_WATCH_LIST,
         method: "POST",
         body: { projectId },
       }),
     }),
     removeProjectFromUserWatchList: builder.mutation<
       void,
-      { userId: string; projectId: string }
+      { projectId: string }
     >({
-      query: ({ userId, projectId }) => ({
-        url: `${API_ROUTES.WATCH_LIST(userId)}`,
+      query: ({ projectId }) => ({
+        url: `${API_ROUTES.MY_WATCH_LIST}`,
         method: "DELETE",
         body: { projectId },
       }),
@@ -31,6 +31,8 @@ export const userApi = baseApi.injectEndpoints({
 });
 
 export const {
-  useGetUserWatchListQuery,
+  useGetUserWatchProcessesQuery,
+
   useAddProjectToUserWatchListMutation,
+  useRemoveProjectFromUserWatchListMutation,
 } = userApi;

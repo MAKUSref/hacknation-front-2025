@@ -2,10 +2,9 @@ import { useId } from "react";
 import { useParams } from "react-router";
 import { Collapse, type CollapseProps } from "antd";
 import { Timeline } from "@/components/molecules/Timeline";
-import bell from "@/assets/bell.svg";
 import { useGetLegislationQuery } from "@/api/baseApi/legislation/legislationApi";
 import { Tag } from "@/components/atoms/Tag";
-import { Btn } from "@/components/atoms/Button";
+import { SubscribeBtn } from "@/components/molecules/SubscribeBtn";
 
 // const timelineData = [
 //   {
@@ -75,7 +74,9 @@ export const ProcessPage = () => {
             Data utworzenia:{" "}
             {new Date(legislation.createdAt).toLocaleDateString()}
           </p>
-          <h3 className="font-bold mt-4 mb-6 leading-tight">{legislation.title}</h3>
+          <h3 className="font-bold mt-4 mb-6 leading-tight">
+            {legislation.title}
+          </h3>
           <p className="text-sm text-gray-500">
             <span className="font-semibold">Pełen tytuł</span>:{" "}
             {legislation.description}
@@ -100,10 +101,7 @@ export const ProcessPage = () => {
         </section>
       </section>
       <section className="right w-100">
-        <Btn className="w-100 justify-start gap-3 px-2!">
-          <img className="ml-5" width={20} src={bell} alt="Bell icon" />
-          Bądź na bieżąco z pracami
-        </Btn>
+        <SubscribeBtn processId={legislation._id} />
         <div className="flex flex-col gap-2 mt-10">
           <h5 className="font-medium text-sm">Podziel się swoją opinią</h5>
           <p className="text-gray-500 text-sm">
