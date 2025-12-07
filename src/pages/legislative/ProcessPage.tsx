@@ -37,7 +37,8 @@ const items: CollapseProps["items"] = [
   },
 ];
 
-const mapTitle = (
+// eslint-disable-next-line react-refresh/only-export-components
+export const mapTitle = (
   dataset: ILegislationStep[],
   stepsInfo: ILegislationStepsInfo[]
 ) => {
