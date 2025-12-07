@@ -5,30 +5,30 @@ import { Timeline } from "@/components/molecules/Timeline";
 import bell from "@/assets/bell.svg";
 import { useGetLegislationQuery } from "@/api/baseApi/legislation/legislationApi";
 
-const timelineData = [
-  {
-    id: "1",
-    date: "05-12-2025",
-    title: "Ustawa przedstawiona prezydentowi do podpisu",
-    description:
-      "Prezydent ma 21 dni na podpisanie ustawy, skierowanie jej do trybunału konstytucyjnego lub odmowy podpisu",
-    tag: "Prezydent",
-    icon: "rocket" as const,
-  },
-  {
-    id: "2",
-    date: "02-11-2025",
-    title: "Ustawa przyjęta w trzecim głosowaniu",
-    tag: "Sejm",
-    icon: "moon" as const,
-  },
-  {
-    id: "3",
-    date: "02-11-2025",
-    title: "Ustawa przyjęta w trzecim głosowaniu",
-    icon: "moon-gray" as const,
-  },
-];
+// const timelineData = [
+//   {
+//     id: "1",
+//     date: "05-12-2025",
+//     title: "Ustawa przedstawiona prezydentowi do podpisu",
+//     description:
+//       "Prezydent ma 21 dni na podpisanie ustawy, skierowanie jej do trybunału konstytucyjnego lub odmowy podpisu",
+//     tag: "Prezydent",
+//     icon: "rocket" as const,
+//   },
+//   {
+//     id: "2",
+//     date: "02-11-2025",
+//     title: "Ustawa przyjęta w trzecim głosowaniu",
+//     tag: "Sejm",
+//     icon: "moon" as const,
+//   },
+//   {
+//     id: "3",
+//     date: "02-11-2025",
+//     title: "Ustawa przyjęta w trzecim głosowaniu",
+//     icon: "moon-gray" as const,
+//   },
+// ];
 
 const text = `
   test
@@ -90,7 +90,7 @@ export const ProcessPage = () => {
           <Collapse accordion ghost items={items} defaultActiveKey={["1"]} />
         </section>
         <section className="my-12">
-          <Timeline items={timelineData} />
+          <Timeline items={legislation.steps} />
         </section>
         <section>
           <p className="text-lg mb-2">Załączniki do projektu:</p>
