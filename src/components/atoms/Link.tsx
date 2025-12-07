@@ -10,8 +10,8 @@ export const Link = ({ active, className, ...linkProps }: LinkProps) => {
     <a
       {...linkProps}
       className={clsx(
-        "pb-2",
-        active && "border-b-2 border-[#F54D58]",
+        "pb-2 -mb-2",
+        active && "border-b-2 border-secondary",
         className
       )}
     >

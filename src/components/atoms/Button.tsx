@@ -19,7 +19,7 @@ export const Btn = ({ variant = "primary", className, ...btnProps }: BtnProps) =
     <button
       {...btnProps}
       className={clsx(
-        "text-base rounded-full py-3 px-6 cursor-pointer h-12 flex items-center",
+        "text-base rounded-full py-3 px-6 cursor-pointer h-12 flex items-center justify-center",
         BTN_VARIANT_CLASSES[variant],
         className
       )}
