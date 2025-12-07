@@ -5,31 +5,7 @@ import { Timeline } from "@/components/molecules/Timeline";
 import { useGetLegislationQuery } from "@/api/baseApi/legislation/legislationApi";
 import { Tag } from "@/components/atoms/Tag";
 import { SubscribeBtn } from "@/components/molecules/SubscribeBtn";
-
-// const timelineData = [
-//   {
-//     id: "1",
-//     date: "05-12-2025",
-//     title: "Ustawa przedstawiona prezydentowi do podpisu",
-//     description:
-//       "Prezydent ma 21 dni na podpisanie ustawy, skierowanie jej do trybunału konstytucyjnego lub odmowy podpisu",
-//     tag: "Prezydent",
-//     icon: "rocket" as const,
-//   },
-//   {
-//     id: "2",
-//     date: "02-11-2025",
-//     title: "Ustawa przyjęta w trzecim głosowaniu",
-//     tag: "Sejm",
-//     icon: "moon" as const,
-//   },
-//   {
-//     id: "3",
-//     date: "02-11-2025",
-//     title: "Ustawa przyjęta w trzecim głosowaniu",
-//     icon: "moon-gray" as const,
-//   },
-// ];
+import { Loader } from "@/components/molecules/Loader";
 
 const text = `
   test
@@ -61,7 +37,7 @@ export const ProcessPage = () => {
   const { data: legislation } = useGetLegislationQuery(id || "");
 
   if (!legislation) {
-    return <div>Ładowanie danych legislacyjnych...</div>;
+    return <Loader />;
   }
 
   return (

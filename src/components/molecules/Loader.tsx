@@ -1,0 +1,9 @@
+import { Spin } from "antd";
+
+export function Loader() {
+  return (
+    <div className="h-screen w-screen flex items-center justify-center">
+      <Spin size="large" />
+    </div>
+  );
+}
