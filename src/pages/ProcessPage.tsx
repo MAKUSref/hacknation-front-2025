@@ -4,6 +4,8 @@ import { Collapse, type CollapseProps } from "antd";
 import { Timeline } from "@/components/molecules/Timeline";
 import bell from "@/assets/bell.svg";
 import { useGetLegislationQuery } from "@/api/baseApi/legislation/legislationApi";
+import { Tag } from "@/components/atoms/Tag";
+import { Btn } from "@/components/atoms/Button";
 
 // const timelineData = [
 //   {
@@ -37,13 +39,13 @@ const text = `
 const items: CollapseProps["items"] = [
   {
     key: "1",
-    label: <p className="font-bold text-lg">Jaki problem jest rozwiązywany?</p>,
+    label: <p className="font-semibold">Jaki problem jest rozwiązywany?</p>,
     children: <p>{text}</p>,
   },
   {
     key: "2",
     label: (
-      <p className="font-bold text-lg">
+      <p className="font-semibold">
         Rekomendowane rozwiązanie, w tym planowane narzędzia interwencji i
         oczekiwany efekt
       </p>
@@ -73,23 +75,21 @@ export const ProcessPage = () => {
             Data utworzenia:{" "}
             {new Date(legislation.createdAt).toLocaleDateString()}
           </p>
-          <h3 className="font-bold my-10">{legislation.title}</h3>
-          <p className="text-sm text-gray-400">
-            <span className="font-bold">Pełen tytuł</span>:{" "}
+          <h3 className="font-bold mt-4 mb-6 leading-tight">{legislation.title}</h3>
+          <p className="text-sm text-gray-500">
+            <span className="font-semibold">Pełen tytuł</span>:{" "}
             {legislation.description}
           </p>
         </section>
-        <section className="badges flex flex-row gap-4 my-10">
+        <section className="badges flex flex-row gap-2 my-4">
           {legislation.tags?.map((tag) => (
-            <div className="bg-gray-200 p-2 rounded-lg" key={`${keyId}-${tag}`}>
-              {tag}
-            </div>
+            <Tag key={`${keyId}-${tag}`}>{tag}</Tag>
           ))}
         </section>
-        <section className="my-12">
-          <Collapse accordion ghost items={items} defaultActiveKey={["1"]} />
+        <section className="mt-6 mb-10">
+          <Collapse accordion ghost items={items} />
         </section>
-        <section className="my-12">
+        <section className="my-6">
           <Timeline items={legislation.steps} />
         </section>
         <section>
@@ -100,25 +100,25 @@ export const ProcessPage = () => {
         </section>
       </section>
       <section className="right w-100">
-        <button className="w-100 bg-[#345865] rounded-4xl p-3 text-white font-bold hover:cursor-pointer flex align-middle gap-3">
+        <Btn className="w-100 justify-start gap-3 px-2!">
           <img className="ml-5" width={20} src={bell} alt="Bell icon" />
           Bądź na bieżąco z pracami
-        </button>
+        </Btn>
         <div className="flex flex-col gap-2 mt-10">
-          <h5 className="font-medium">Podziel się swoją opinią</h5>
-          <p className="text-gray-600">
+          <h5 className="font-medium text-sm">Podziel się swoją opinią</h5>
+          <p className="text-gray-500 text-sm">
             Twoja opinia jest ważna — pomoże w tworzeniu przepisów, które są
             bardziej przejrzyste, skuteczne i dostosowane do potrzeb
             społeczeństwa.
           </p>
-          <div className="flex flex-row gap-2 items-center mt-5">
+          <div className="flex flex-row gap-4 items-center mt-5">
             <div className="font-bold text-5xl">12</div>
-            <div className="text-lg/5 text-gray-600">
+            <div className="text-sm text-gray-600 max-w-[200px]">
               Liczba osób, które podzieliły się swoją opinią
             </div>
           </div>
           <textarea
-            className="border-black border-2 rounded-xl p-5 mt-5"
+            className="border-black border-2 rounded-xl px-5 py-3 mt-5 text-sm"
             placeholder="Co sądzisz o projekcie?"
             rows={8}
           ></textarea>

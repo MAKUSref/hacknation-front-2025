@@ -5,10 +5,9 @@ import { setAccessToken } from "@/redux/session/sessionSlice";
 import { Btn } from "../atoms/Button";
 import { useNavigate } from "react-router";
 import { PATHS } from "@/router/paths";
-import { Spin } from "antd";
 
 export function LoginButton() {
-  const [login, { isLoading }] = useLoginMutation();
+  const [login] = useLoginMutation();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -29,7 +28,6 @@ export function LoginButton() {
     >
       <img width={35} src={emblemIcon} alt="Emblem icon" />
       <span>Zaloguj się</span>
-      {isLoading && <Spin />}
     </Btn>
   );
 }
