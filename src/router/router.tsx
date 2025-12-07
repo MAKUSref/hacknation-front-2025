@@ -7,6 +7,10 @@ import { EpuapLoginPage } from "@/pages/EpuapLoginPage";
 import { NavigationLayout } from "@/components/layouts/NavigationLayout";
 import { AllProcessesPage } from "@/pages/legislative/AllProcessesPage";
 import { WatchedProcessesPage } from "@/pages/legislative/WatchedProcessesPage";
+import { AdminLayout } from "@/components/layouts/AdminLayout";
+import { AdminDashboardPage } from "@/pages/admin/AdminDashboardPage";
+import { AddProcessPage } from "@/pages/admin/AddProcessPage";
+import { UpdateProcessPage } from "@/pages/admin/UpdateProcessPage";
 
 export function AppRouter() {
   return (
@@ -23,6 +27,12 @@ export function AppRouter() {
             />
           </Route>
           <Route path={PATHS.EPUAP_LOGIN} element={<EpuapLoginPage />} />
+
+          <Route path={PATHS.ADMIN.DASHBOARD} element={<AdminLayout />}>
+            <Route index path={PATHS.ADMIN.DASHBOARD} element={<AdminDashboardPage />} />
+            <Route path={PATHS.ADMIN.ADD_PROCESSES} element={<AddProcessPage />} />
+            <Route path={PATHS.ADMIN.UPDATE_PROCESS} element={<UpdateProcessPage />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>

@@ -3,11 +3,18 @@ import { Btn } from "../atoms/Button";
 import { logout } from "@/redux/session/sessionSlice";
 import UserIcon from "@/assets/user.svg";
 
-export function LogoutButton() {
+export function LogoutButton({ onClick }: { onClick?: () => void }) {
   const dispatch = useAppDispatch();
 
   return (
-    <Btn className="gap-2.5 px-5!" variant="outline" onClick={() => dispatch(logout())}>
+    <Btn
+      className="gap-2.5 px-5!"
+      variant="outline"
+      onClick={() => {
+        if (onClick) onClick();
+        dispatch(logout());
+      }}
+    >
       <img src={UserIcon} width={25} alt="User icon" />
       Konto
     </Btn>
