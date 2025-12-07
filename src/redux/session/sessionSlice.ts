@@ -1,6 +1,5 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { SessionState } from "./types";
-import type { LegislationTag } from "@/api/baseApi/legislation/types";
 
 const initialState: SessionState = {
   accessToken: undefined,
@@ -16,8 +15,9 @@ export const sessionSlice = createSlice({
     },
     logout: (state) => {
       state.accessToken = undefined;
+      state.selectedFields = [];
     },
-    setSelectedFields: (state, action: PayloadAction<LegislationTag[]>) => {
+    setSelectedFields: (state, action: PayloadAction<string[]>) => {
       state.selectedFields = action.payload;
     },
   },

@@ -1,12 +1,10 @@
 import clsx from "clsx";
 import { useState } from "react";
-import { LegislationIcon } from "./LegislationIcon";
-import { LegislationTag } from "@/api/baseApi/legislation/types";
 
 type FieldCheckboxProps = {
-  name: LegislationTag;
+  name: string;
   active?: boolean;
-  onChange?: (active: boolean, fieldName: LegislationTag) => void;
+  onChange?: (active: boolean, fieldName: string) => void;
 };
 
 export function FieldCheckbox({
@@ -29,8 +27,8 @@ export function FieldCheckbox({
       )}
       onClick={handleClick}
     >
-      <LegislationIcon tag={name} />
-      <p>{name}</p>
+      {/* <LegislationIcon tag={name} /> */}
+      <p className="capitalize">{name}</p>
     </div>
   );
 }
