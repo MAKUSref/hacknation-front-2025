@@ -25,7 +25,7 @@ export function Navbar(props: React.HTMLAttributes<HTMLElement>) {
       </div>
       <div className="navigation-links flex flex-wrap gap-6 max-md:hidden">
         <div className="whitespace-nowrap">
-          <Link active href={PATHS.HOME}>
+          <Link exact href={PATHS.HOME}>
             Strona Główna
           </Link>
         </div>
