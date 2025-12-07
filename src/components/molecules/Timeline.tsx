@@ -33,17 +33,11 @@ const TimelineIcon: React.FC<{ type: "rocket" | "moon-gray" | "moon" }> = ({
   );
 };
 
-const mapPlaceToIcon = (place: StepPlace) => {
-  switch (place) {
-    case "PREZYDENT":
-      return <TimelineIcon type={"rocket"} />;
-    case "SEJM":
-      return <TimelineIcon type={"moon-gray"} />;
-    case "SENAT":
-      return <TimelineIcon type={"moon"} />;
-    default:
-      return <TimelineIcon type={"moon-gray"} />;
-  }
+const mapPlaceToIcon = (item: ILegislationStep) => {
+  if (item.isActive) return <TimelineIcon type={"rocket"} />;
+  if (item.place !== "PRE_SEJM") return <TimelineIcon type={"moon"} />;
+
+  return <TimelineIcon type={"moon-gray"} />;
 };
 
 const mapPlaceToBadge = (place: StepPlace) => {
@@ -91,17 +85,9 @@ export const Timeline: React.FC<{ items: ILegislationStep[] }> = ({
             </span>
           </div>
 
-          <div className="shrink-0">
-            {mapPlaceToIcon(
-              item.isActive || item.place === StepPlace.PREZYDENT
-                ? StepPlace.PREZYDENT
-                : item.isOmitted || item.place === StepPlace.SENAT
-                ? StepPlace.SENAT
-                : StepPlace.SEJM
-            )}
-          </div>
+          <div className="shrink-0">{mapPlaceToIcon(item)}</div>
 
-          <div className="flex-1 pt-1">
+          <div className={`${item.isActive ? "" : "ml-[30px]"} flex-1 pt-1`}>
             <h4 className="text-base font-semibold mb-1">{item.type}</h4>
 
             {item.description && (
