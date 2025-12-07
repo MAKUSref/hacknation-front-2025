@@ -1,22 +1,10 @@
 import React from "react";
+import type { ILegislationStep } from "@/api/baseApi/legislation/types";
 import redMoon from "@/assets/red-moon.svg";
 import grayMoon from "@/assets/gray-moon.svg";
 import rocketIcon from "@/assets/rocket.svg";
 
-export interface TimelineItem {
-  id: string;
-  date: string;
-  title: string;
-  description?: string;
-  tag?: string;
-  icon: "rocket" | "moon" | "moon-gray";
-}
-
-interface TimelineProps {
-  items: TimelineItem[];
-}
-
-const TimelineIcon: React.FC<{ type: TimelineItem["icon"] }> = ({ type }) => {
+const TimelineIcon: React.FC<{ type: "rocket" | "moon-gray" }> = ({ type }) => {
   if (type === "rocket") {
     return (
       <div className="flex items-center justify-center w-20 h-20">
@@ -40,33 +28,38 @@ const TimelineIcon: React.FC<{ type: TimelineItem["icon"] }> = ({ type }) => {
   );
 };
 
-export const Timeline: React.FC<TimelineProps> = ({ items }) => {
+export const Timeline: React.FC<{ items: ILegislationStep[] }> = ({
+  items,
+}) => {
   return (
     <div className="relative">
-      {items.map((item, index) => (
-        <div key={item.id} className="relative flex gap-4 pb-8">
+      {[...items].reverse().map((item, index) => (
+        <div key={`${item._id}-${index}`} className="relative flex gap-4 pb-8">
           {index < items.length - 1 && (
             <div className="absolute left-[133px] top-12 w-1.5 h-full bg-gray-300 -z-10" />
           )}
 
           <div className="shrink-0 w-24 pt-3">
-            <span className="text-sm font-medium">{item.date}</span>
+            <span className="text-sm font-medium">
+              {new Date(
+                (item.isActive ? item.startDate : item.endDate) ||
+                  item.startDate
+              ).toLocaleDateString()}
+            </span>
           </div>
 
           <div className="shrink-0">
-            <TimelineIcon type={item.icon} />
+            <TimelineIcon type={item.isActive ? "rocket" : "moon-gray"} />
           </div>
 
           <div className="flex-1 pt-1">
-            <h4 className="text-base font-semibold mb-1">{item.title}</h4>
-            {item.description && (
-              <p className="text-sm text-gray-600 mb-2">{item.description}</p>
-            )}
-            {item.tag && (
-              <span className="inline-block px-3 py-1 text-xs font-medium text-green-700 bg-green-100 rounded-full">
-                {item.tag}
-              </span>
-            )}
+            <h4 className="text-base font-semibold mb-1">{item.type}</h4>
+
+            <p className="text-sm text-gray-600 mb-2">Tescior gosciu</p>
+
+            <span className="inline-block px-3 py-1 text-xs font-medium text-green-700 bg-green-100 rounded-full">
+              nwm
+            </span>
           </div>
         </div>
       ))}
