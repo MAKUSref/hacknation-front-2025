@@ -28,7 +28,7 @@ export const SubscribeBtn = ({ processId }: { processId: string }) => {
 
   return (
     <Btn
-      className="w-100 justify-start gap-3 px-2!"
+      className="w-100 justify-start gap-3 pl-0 pr-2"
       onClick={handleSubscribeProject}
     >
       <img

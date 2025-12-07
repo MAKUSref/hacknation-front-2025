@@ -24,7 +24,7 @@ export function LoginButton() {
     <Btn
       onClick={handleLogin}
       variant="outline"
-      className="flex-nowrap gap-2.5"
+      className="flex-nowrap gap-2.5 pl-3 text-sm"
     >
       <img width={35} src={emblemIcon} alt="Emblem icon" />
       <span>Zaloguj się</span>

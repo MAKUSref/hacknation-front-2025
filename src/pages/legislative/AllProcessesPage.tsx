@@ -7,7 +7,7 @@ export function AllProcessesPage() {
       <h4>Dokumenty legislacyjne</h4>
       <div className="grid grid-cols-12 gap-4 mt-10">
         <div className="col-span-3">
-          <div className="border border-[#D2D2D2] rounded-xl p-5 gap-3 flex flex-col">
+          <div className="border border-[#e9e7e7] rounded-md p-5 gap-3 flex flex-col">
             <p className="text-base font-semibold">Rodzaje dokumentu</p>
             <div className="flex flex-col gap-1">
               <p className="text-xs font-normal">Rodzaj dokumentu</p>
