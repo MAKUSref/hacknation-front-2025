@@ -1,15 +1,26 @@
-import { useGetLegislationListQuery } from "@/api/baseApi/legislation/legislationApi";
+import {
+  useGetLegislationListQuery,
+  useGetLegislationStepsQuery,
+} from "@/api/baseApi/legislation/legislationApi";
 import { Table } from "antd";
 import { useNavigate } from "react-router";
 import { Tag } from "../atoms/Tag";
 import dayjs from "dayjs";
 import { PATHS } from "@/router/paths";
+import { mapTitle } from "@/pages/legislative/ProcessPage";
+import type { ILegislationProject } from "@/api/baseApi/legislation/types";
 
 type LegislationWithId = { _id?: string; id?: string };
 
 export function AllDocsTable() {
   const { data } = useGetLegislationListQuery();
+  const { data: steps } = useGetLegislationStepsQuery();
   const navigate = useNavigate();
+
+  const mapItem = (item: ILegislationProject) => {
+    if (!data || !steps) return [];
+    return mapTitle(item.steps, steps);
+  };
 
   return (
     <Table
@@ -56,7 +67,7 @@ export function AllDocsTable() {
             categories: item.tags?.join(", ") || "",
             applicant: item.applicant,
             modification: dayjs(item.updatedAt).format("DD.MM.YYYY"),
-            status: <Tag>{item.steps.at(-1)?.type || ""}</Tag>,
+            status: <Tag>{mapItem(item).at(-1)?.type || ""}</Tag>,
           };
         }) || []
       }

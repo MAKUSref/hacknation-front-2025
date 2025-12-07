@@ -1,15 +1,26 @@
-import { useGetWatchedLegislationListQuery } from "@/api/baseApi/legislation/legislationApi";
+import {
+  useGetLegislationStepsQuery,
+  useGetWatchedLegislationListQuery,
+} from "@/api/baseApi/legislation/legislationApi";
 import { Table } from "antd";
 import dayjs from "dayjs";
 import { useNavigate } from "react-router";
 import { PATHS } from "@/router/paths";
 import { Tag } from "../atoms/Tag";
+import { mapTitle } from "@/pages/legislative/ProcessPage";
+import type { ILegislationProject } from "@/api/baseApi/legislation/types";
 
 type LegislationWithId = { _id?: string; id?: string };
 
 export function WatchedDocsTable() {
   const { data, isLoading } = useGetWatchedLegislationListQuery();
+  const { data: steps } = useGetLegislationStepsQuery();
   const navigate = useNavigate();
+
+  const mapItem = (item: ILegislationProject) => {
+    if (!data || !steps) return [];
+    return mapTitle(item.steps, steps);
+  };
 
   return (
     <div>
@@ -59,7 +70,7 @@ export function WatchedDocsTable() {
               categories: item.tags?.join(", ") || "",
               applicant: item.applicant,
               modification: dayjs(item.updatedAt).format("DD.MM.YYYY"),
-              status: <Tag>{item.steps.at(-1)?.type || ""}</Tag>,
+              status: <Tag>{mapItem(item).at(-1)?.type || ""}</Tag>,
             };
           }) || []
         }
