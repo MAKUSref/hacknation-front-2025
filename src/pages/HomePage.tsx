@@ -14,7 +14,7 @@ export const HomePage = () => {
           Polsce
         </h1>
 
-        <h5 className="max-w-[900px]">
+        <h5 className="max-w-[900px] font-normal">
           Dołącz do otwartego procesu konsultacji i miej realny wpływ na
           przepisy, które kształtują nasze codzienne życie.
         </h5>
