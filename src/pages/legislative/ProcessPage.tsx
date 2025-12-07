@@ -16,6 +16,7 @@ import {
   type ILegislationStep,
   type ILegislationStepsInfo,
 } from "@/api/baseApi/legislation/types";
+import { QueryForm } from "@/components/molecules/AIChat";
 
 const text = `
   test
@@ -148,6 +149,7 @@ export const ProcessPage = () => {
           {isOpinionFormAvailable && (
             <CommentForm processId={legislation._id} />
           )}
+            <QueryForm processId={legislation._id} />
           {isFilled && (
             <p className="mt-10">
               Już wypełniłeś ten formularz. Dziękujemy za twoją opinię!

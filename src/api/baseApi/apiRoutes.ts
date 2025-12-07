@@ -5,4 +5,5 @@ export const API_ROUTES = {
   MY_WATCH_LIST: `/user/watch/me`,
   STEPS: "/steps-info",
   COMMENTS: "/comments",
+  AI: "/ai",
 };
