@@ -6,7 +6,6 @@ import { theme } from "@/antdTheme";
 import "dayjs/locale/pl";
 import dayjs from "dayjs";
 import { ChooseFieldsModalProvider } from "@/contexts/ChooseFieldsModalContext";
-import { Footer } from "@/components/molecules/Footer";
 import { ParamsProvider } from "@/providers/ParamsProvider";
 import { NuqsAdapter } from "nuqs/adapters/react";
 
@@ -19,10 +18,7 @@ export function MainLayout() {
         <Provider store={store}>
           <ChooseFieldsModalProvider>
             <ParamsProvider>
-              <div className="container">
-                <Outlet />
-              </div>
-              <Footer />
+              <Outlet />
             </ParamsProvider>
           </ChooseFieldsModalProvider>
         </Provider>

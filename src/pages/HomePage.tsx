@@ -1,5 +1,4 @@
 import { useHealthCheck } from "@/hooks/useHealthCheck";
-import { Navbar } from "@/components/molecules/Navbar";
 import { Btn } from "@/components/atoms/Button";
 import { LatestDocsTable } from "@/components/organisms/LatestDocsTable";
 
@@ -8,7 +7,6 @@ export const HomePage = () => {
 
   return (
     <>
-      <Navbar />
       <header className="flex flex-col items-center gap-15 mt-20 text-center md:min-h-[500px] justify-end">
         <h1 className="max-w-[1000px]">
           Uczestnicz w procesie tworzenia
