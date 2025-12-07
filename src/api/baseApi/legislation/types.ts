@@ -53,6 +53,14 @@ export enum LegislativeProcessStep {
   OGLOSZENIE_USTAWY = "Ogłoszenie ustawy",
 }
 
+export enum StepPlace {
+  PRE_SEJM = "PRE_SEJM",
+  SEJM = "SEJM",
+  SENAT = "SENAT",
+  PREZYDENT = "PREZYDENT",
+  UKONCZONE = "UKONCZONE",
+}
+
 export interface ILegislationStep {
   _id: string;
   projectId?: string;
@@ -62,7 +70,7 @@ export interface ILegislationStep {
   isBlocked: boolean;
   startDate: Date;
   endDate?: Date;
-  place?: string;
+  place?: StepPlace;
   description?: string;
 }
 
@@ -75,14 +83,6 @@ export interface ILegislationProject extends Document {
   tags?: LegislationTag[];
   createdAt: Date;
   updatedAt: Date;
-}
-
-export enum StepPlace {
-  PRE_SEJM = "PRE_SEJM",
-  SEJM = "SEJM",
-  SENAT = "SENAT",
-  PREZYDENT = "PREZYDENT",
-  UKONCZONE = "UKONCZONE",
 }
 
 export interface ILegislationStepsInfo {
