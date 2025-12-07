@@ -1,17 +1,17 @@
 import {
-  useAddProjectToUserWatchListMutation,
-  useGetUserWatchProcessesQuery,
-  useRemoveProjectFromUserWatchListMutation,
-} from "@/api/baseApi/user/userApi";
+  useAddProjectToMyWatchListMutation,
+  useGetMyWatchProcessesQuery,
+  useRemoveProjectFromMyWatchListMutation,
+} from "@/api/baseApi/me/meApi";
 import { Btn } from "../atoms/Button";
 import { useMemo } from "react";
 import bell from "@/assets/bell.svg";
 import bellActive from "@/assets/bell-active.svg";
 
 export const SubscribeBtn = ({ processId }: { processId: string }) => {
-  const { data: watchedProjects } = useGetUserWatchProcessesQuery();
-  const [subscribeProject] = useAddProjectToUserWatchListMutation();
-  const [unsubscribeProject] = useRemoveProjectFromUserWatchListMutation();
+  const { data: watchedProjects } = useGetMyWatchProcessesQuery();
+  const [subscribeProject] = useAddProjectToMyWatchListMutation();
+  const [unsubscribeProject] = useRemoveProjectFromMyWatchListMutation();
 
   const isProcessWatched = useMemo(
     () => watchedProjects?.some((project) => project._id === processId),
