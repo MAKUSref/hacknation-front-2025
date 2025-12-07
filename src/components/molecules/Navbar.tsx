@@ -12,7 +12,7 @@ export function Navbar(props: React.HTMLAttributes<HTMLElement>) {
 
   return (
     <nav
-      className="p-2 w-full flex flex-wrap items-center gap-6 container"
+      className="p-2 w-full flex flex-wrap items-center gap-6 container fixed top-0 left-0 right-0 bg-white"
       {...props}
     >
       <div className="shrink-0">
@@ -30,7 +30,9 @@ export function Navbar(props: React.HTMLAttributes<HTMLElement>) {
           </Link>
         </div>
         <div className="whitespace-nowrap">
-          <Link exact href={PATHS.ALL_PROCESSES}>Wszystkie dokumenty</Link>
+          <Link exact href={PATHS.ALL_PROCESSES}>
+            Wszystkie dokumenty
+          </Link>
         </div>
         {accessToken && (
           <div className="whitespace-nowrap">
