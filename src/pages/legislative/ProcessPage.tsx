@@ -104,11 +104,11 @@ export const ProcessPage = () => {
             {new Date(legislation.createdAt).toLocaleDateString()}
           </p>
           <h3 className="font-bold mt-4 mb-6 leading-tight">
-            {legislation.title}
+            {legislation.description}
           </h3>
           <p className="text-sm text-gray-500">
             <span className="font-semibold">Pełen tytuł</span>:{" "}
-            {legislation.description}
+            {legislation.title}
           </p>
         </section>
         <section className="badges flex flex-row gap-2 my-4">
@@ -149,7 +149,7 @@ export const ProcessPage = () => {
           {isOpinionFormAvailable && (
             <CommentForm processId={legislation._id} />
           )}
-            <QueryForm processId={legislation._id} />
+          <QueryForm processId={legislation._id} />
           {isFilled && (
             <p className="mt-10">
               Już wypełniłeś ten formularz. Dziękujemy za twoją opinię!

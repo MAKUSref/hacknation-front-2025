@@ -59,7 +59,7 @@ export function UpdateProcessPage() {
               className="border-[#D2D2D2] border rounded-xl px-5 py-3 text-sm w-full"
               placeholder="Pełny tytuł projektu ustawy"
               rows={6}
-              defaultValue={legislation?.description}
+              defaultValue={legislation?.title}
             ></textarea>
           </div>
           <div className="flex flex-col gap-2">
@@ -68,7 +68,7 @@ export function UpdateProcessPage() {
               className="border-[#D2D2D2] border rounded-xl px-5 py-3 text-sm w-full"
               placeholder="Pełny tytuł projektu ustawy"
               rows={2}
-              defaultValue={legislation?.title}
+              defaultValue={legislation?.description}
             ></textarea>
           </div>
           <div className="flex flex-col gap-2">
