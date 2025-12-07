@@ -3,9 +3,12 @@ import serviceLogo from "@/assets/service-logo.svg";
 import { LoginButton } from "./LoginButton";
 import { LogoutButton } from "./LogoutButton";
 import { Link } from "@/components/atoms/Link";
+import { useNavigate } from "react-router";
+import { PATHS } from "@/router/paths";
 
 export function Navbar(props: React.HTMLAttributes<HTMLElement>) {
   const accessToken = useAppSelector((state) => state.session.accessToken);
+  const navigate = useNavigate();
 
   return (
     <nav
@@ -13,16 +16,23 @@ export function Navbar(props: React.HTMLAttributes<HTMLElement>) {
       {...props}
     >
       <div className="shrink-0">
-        <img src={serviceLogo} alt="Service Logo" />
+        <img
+          className="cursor-pointer"
+          src={serviceLogo}
+          alt="Service Logo"
+          onClick={() => navigate(PATHS.HOME)}
+        />
       </div>
       <div className="navigation-links flex flex-wrap gap-6 max-md:hidden">
         <div className="whitespace-nowrap">
-          <Link active href="#">
+          <Link active href={PATHS.HOME}>
             Strona Główna
           </Link>
         </div>
         <div className="whitespace-nowrap">
-          <Link href="#">Wszystkie dokumenty</Link>
+          <Link href={PATHS.ALL_PROCESSES}>
+            Wszystkie dokumenty
+          </Link>
         </div>
         <div className="whitespace-nowrap">
           <Link href="#">Obserwowane dokumenty</Link>
