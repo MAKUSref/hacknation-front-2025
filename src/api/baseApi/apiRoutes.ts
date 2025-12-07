@@ -4,4 +4,5 @@ export const API_ROUTES = {
   LEGISLATION: "/legislation",
   MY_WATCH_LIST: `/user/watch/me`,
   STEPS: "/steps-info",
+  COMMENTS: "/comments",
 };

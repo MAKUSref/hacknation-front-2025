@@ -5,9 +5,11 @@ import { Timeline } from "@/components/molecules/Timeline";
 import {
   useGetLegislationQuery,
   useGetLegislationStepsQuery,
+  useGetCommentsListQuery,
 } from "@/api/baseApi/legislation/legislationApi";
 import { Tag } from "@/components/atoms/Tag";
 import { SubscribeBtn } from "@/components/molecules/SubscribeBtn";
+import { CommentForm } from "@/components/molecules/CommentForm";
 import { Loader } from "@/components/molecules/Loader";
 import {
   StepPlace,
@@ -62,18 +64,28 @@ export const ProcessPage = () => {
 
   const { data: legislation } = useGetLegislationQuery(id || "");
   const { data: steps } = useGetLegislationStepsQuery();
+  const { data: comments } = useGetCommentsListQuery({ projectId: id || "" });
 
   const mappedItems = useMemo(() => {
     if (!legislation || !steps) return [];
     return mapTitle(legislation.steps, steps);
   }, [legislation, steps]);
 
+  const isFilled = useMemo(
+    () =>
+      comments?.some(
+        (comment) => comment.userId._id === "693495ef5f2b4db734263314"
+      ),
+    [comments]
+  );
+
   const isOpinionFormAvailable = useMemo(
     () =>
       mappedItems.find(
-        (item) => item.isActive && item.place === StepPlace.PRE_SEJM
+        (item) =>
+          item.isActive && item.place === StepPlace.PRE_SEJM && !isFilled
       ),
-    [mappedItems]
+    [mappedItems, isFilled]
   );
 
   if (!legislation || !steps) {
@@ -134,16 +146,12 @@ export const ProcessPage = () => {
             </div>
           </div>
           {isOpinionFormAvailable && (
-            <>
-              <textarea
-                className="border-black border-2 rounded-xl px-5 py-3 mt-5 text-sm"
-                placeholder="Co sądzisz o projekcie?"
-                rows={8}
-              ></textarea>
-              <button className="bg-red-400 text-white p-3 rounded-4xl font-bold w-100 hover:cursor-pointer mt-5">
-                Wyślij swoją uwagę
-              </button>
-            </>
+            <CommentForm processId={legislation._id} />
+          )}
+          {isFilled && (
+            <p className="mt-10">
+              Już wypełniłeś ten formularz. Dziękujemy za twoją opinię!
+            </p>
           )}
         </div>
       </section>

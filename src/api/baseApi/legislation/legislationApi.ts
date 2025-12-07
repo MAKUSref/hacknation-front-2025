@@ -16,6 +16,24 @@ export const legislationApi = baseApi.injectEndpoints({
     getWatchedLegislationList: builder.query<ILegislationProject[], void>({
       query: () => API_ROUTES.MY_WATCH_LIST,
     }),
+    getCommentsList: builder.query<
+      { userId: { _id: string } }[],
+      { projectId: string }
+    >({
+      query: ({ projectId }) => `${API_ROUTES.COMMENTS}/project/${projectId}`,
+      providesTags: ["comments"],
+    }),
+    addComment: builder.mutation<
+      void,
+      { projectId: string; userId: string; content: string }
+    >({
+      query: (data) => ({
+        url: API_ROUTES.COMMENTS,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["comments"],
+    }),
   }),
 });
 
@@ -24,4 +42,6 @@ export const {
   useGetLegislationQuery,
   useGetLegislationStepsQuery,
   useGetWatchedLegislationListQuery,
+  useGetCommentsListQuery,
+  useAddCommentMutation,
 } = legislationApi;
