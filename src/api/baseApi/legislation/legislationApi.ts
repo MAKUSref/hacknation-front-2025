@@ -1,11 +1,18 @@
 import { baseApi } from "@/api/baseApi/baseApi";
 import type { ILegislationProject, ILegislationStepsInfo } from "./types";
 import { API_ROUTES } from "../apiRoutes";
+import dayjs from "dayjs";
 
 export const legislationApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getLegislationList: builder.query<ILegislationProject[], void>({
       query: () => API_ROUTES.LEGISLATION,
+      transformResponse: (response: ILegislationProject[]) => {
+        return response?.sort((a, b) =>
+          //FIX: NOT WORKING
+          dayjs(a.createdAt).isAfter(dayjs(b.createdAt)) ? -1 : 1
+        );
+      },
     }),
     getLegislation: builder.query<ILegislationProject, string>({
       query: (id: string) => `${API_ROUTES.LEGISLATION}/${id}`,
