@@ -1,11 +1,18 @@
-import { useId } from "react";
+import { useId, useMemo } from "react";
 import { useParams } from "react-router";
 import { Collapse, type CollapseProps } from "antd";
 import { Timeline } from "@/components/molecules/Timeline";
-import { useGetLegislationQuery } from "@/api/baseApi/legislation/legislationApi";
+import {
+  useGetLegislationQuery,
+  useGetLegislationStepsQuery,
+} from "@/api/baseApi/legislation/legislationApi";
 import { Tag } from "@/components/atoms/Tag";
 import { SubscribeBtn } from "@/components/molecules/SubscribeBtn";
 import { Loader } from "@/components/molecules/Loader";
+import type {
+  ILegislationStep,
+  ILegislationStepsInfo,
+} from "@/api/baseApi/legislation/types";
 
 const text = `
   test
@@ -29,14 +36,37 @@ const items: CollapseProps["items"] = [
   },
 ];
 
+const mapTitle = (
+  dataset: ILegislationStep[],
+  stepsInfo: ILegislationStepsInfo[]
+) => {
+  return dataset.map((step) => {
+    const stepInfo = stepsInfo.find(
+      (info) => info.index === parseInt(step.type)
+    );
+    return {
+      ...step,
+      place: stepInfo ? stepInfo.place : undefined,
+      description: stepInfo ? stepInfo.description : undefined,
+      type: stepInfo ? stepInfo.name : step.type,
+    };
+  });
+};
+
 export const ProcessPage = () => {
   const keyId = useId();
 
   const { id } = useParams<{ id: string }>();
 
   const { data: legislation } = useGetLegislationQuery(id || "");
+  const { data: steps } = useGetLegislationStepsQuery();
 
-  if (!legislation) {
+  const mappedItems = useMemo(() => {
+    if (!legislation || !steps) return [];
+    return mapTitle(legislation.steps, steps);
+  }, [legislation, steps]);
+
+  if (!legislation || !steps) {
     return <Loader />;
   }
 
@@ -67,7 +97,7 @@ export const ProcessPage = () => {
           <Collapse accordion ghost items={items} />
         </section>
         <section className="my-6">
-          <Timeline items={legislation.steps} />
+          <Timeline items={mappedItems} />
         </section>
         <section>
           <p className="text-lg mb-2">Załączniki do projektu:</p>

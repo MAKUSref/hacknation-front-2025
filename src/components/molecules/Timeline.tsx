@@ -55,11 +55,15 @@ export const Timeline: React.FC<{ items: ILegislationStep[] }> = ({
           <div className="flex-1 pt-1">
             <h4 className="text-base font-semibold mb-1">{item.type}</h4>
 
-            <p className="text-sm text-gray-600 mb-2">Tescior gosciu</p>
+            {item.description && (
+              <p className="text-sm text-gray-600 mb-2">{item.description}</p>
+            )}
 
-            <span className="inline-block px-3 py-1 text-xs font-medium text-green-700 bg-green-100 rounded-full">
-              nwm
-            </span>
+            {item.place && (
+              <span className="inline-block px-3 py-1 text-xs font-medium text-green-700 bg-green-100 rounded-full">
+                {item.place}
+              </span>
+            )}
           </div>
         </div>
       ))}

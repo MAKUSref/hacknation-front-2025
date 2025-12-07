@@ -56,10 +56,14 @@ export enum LegislativeProcessStep {
 export interface ILegislationStep {
   _id: string;
   projectId?: string;
-  type: LegislativeProcessStep;
+  type: string;
   isActive: boolean;
+  isOmitted: boolean;
+  isBlocked: boolean;
   startDate: Date;
   endDate?: Date;
+  place?: string;
+  description?: string;
 }
 
 export interface ILegislationProject extends Document {
@@ -71,4 +75,19 @@ export interface ILegislationProject extends Document {
   tags?: LegislationTag[];
   createdAt: Date;
   updatedAt: Date;
+}
+
+export enum StepPlace {
+  PRE_SEJM = "PRE_SEJM",
+  SEJM = "SEJM",
+  SENAT = "SENAT",
+  PREZYDENT = "PREZYDENT",
+  UKONCZONE = "UKONCZONE",
+}
+
+export interface ILegislationStepsInfo {
+  index: number;
+  name: string;
+  place: StepPlace;
+  description: string;
 }
