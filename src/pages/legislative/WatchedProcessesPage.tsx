@@ -1,11 +1,11 @@
-import { AllDocsTable } from "@/components/organisms/AllDocsTable";
 import { ProcessesFilterForm } from "@/components/organisms/forms/ProcessesFilterForm";
+import { WatchedDocsTable } from "@/components/organisms/WatchedDocsTable";
 import { Input } from "antd";
 
-export function AllProcessesPage() {
+export function WatchedProcessesPage() {
   return (
     <div className="mt-20">
-      <h4>Dokumenty legislacyjne</h4>
+      <h4>Obserwowane dokumenty legislacyjne</h4>
       <div className="grid grid-cols-12 gap-4 mt-10">
         <div className="col-span-3">
           <ProcessesFilterForm />
@@ -18,7 +18,7 @@ export function AllProcessesPage() {
             />
           </div>
           <div>
-            <AllDocsTable />
+            <WatchedDocsTable />
           </div>
         </div>
       </div>

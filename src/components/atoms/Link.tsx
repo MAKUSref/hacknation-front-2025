@@ -6,7 +6,12 @@ type LinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
   exact?: boolean;
 };
 
-export const Link = ({ exact = false, className, ...linkProps }: LinkProps) => {
+export const Link = ({
+  exact = false,
+  className,
+  onClick,
+  ...linkProps
+}: LinkProps) => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -27,6 +32,9 @@ export const Link = ({ exact = false, className, ...linkProps }: LinkProps) => {
         e.preventDefault();
         if (linkProps.href) {
           navigate(linkProps.href);
+        }
+        if (onClick) {
+          onClick(e);
         }
       }}
       className={clsx(

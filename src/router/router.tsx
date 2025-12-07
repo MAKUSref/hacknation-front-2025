@@ -6,6 +6,7 @@ import { ProcessPage } from "@/pages/legislative/ProcessPage";
 import { EpuapLoginPage } from "@/pages/EpuapLoginPage";
 import { NavigationLayout } from "@/components/layouts/NavigationLayout";
 import { AllProcessesPage } from "@/pages/legislative/AllProcessesPage";
+import { WatchedProcessesPage } from "@/pages/legislative/WatchedProcessesPage";
 
 export function AppRouter() {
   return (
@@ -16,6 +17,10 @@ export function AppRouter() {
             <Route index path={PATHS.HOME} element={<HomePage />} />
             <Route path={PATHS.ALL_PROCESSES} element={<AllProcessesPage />} />
             <Route path={PATHS.PROCESS} element={<ProcessPage />} />
+            <Route
+              path={PATHS.WATCHED_PROCESSES}
+              element={<WatchedProcessesPage />}
+            />
           </Route>
           <Route path={PATHS.EPUAP_LOGIN} element={<EpuapLoginPage />} />
         </Route>

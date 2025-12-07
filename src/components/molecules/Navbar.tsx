@@ -30,13 +30,13 @@ export function Navbar(props: React.HTMLAttributes<HTMLElement>) {
           </Link>
         </div>
         <div className="whitespace-nowrap">
-          <Link href={PATHS.ALL_PROCESSES}>
-            Wszystkie dokumenty
-          </Link>
+          <Link exact href={PATHS.ALL_PROCESSES}>Wszystkie dokumenty</Link>
         </div>
-        <div className="whitespace-nowrap">
-          <Link href="#">Obserwowane dokumenty</Link>
-        </div>
+        {accessToken && (
+          <div className="whitespace-nowrap">
+            <Link href={PATHS.WATCHED_PROCESSES}>Obserwowane dokumenty</Link>
+          </div>
+        )}
       </div>
       <div className="shrink-0 ml-auto">
         {accessToken ? <LogoutButton /> : <LoginButton />}

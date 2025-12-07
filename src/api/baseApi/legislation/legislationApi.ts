@@ -13,6 +13,9 @@ export const legislationApi = baseApi.injectEndpoints({
     getLegislationSteps: builder.query<ILegislationStepsInfo[], void>({
       query: () => `${API_ROUTES.STEPS}`,
     }),
+    getWatchedLegislationList: builder.query<ILegislationProject[], void>({
+      query: () => API_ROUTES.MY_WATCH_LIST,
+    }),
   }),
 });
 
@@ -20,4 +23,5 @@ export const {
   useGetLegislationListQuery,
   useGetLegislationQuery,
   useGetLegislationStepsQuery,
+  useGetWatchedLegislationListQuery,
 } = legislationApi;
