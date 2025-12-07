@@ -1,7 +1,7 @@
 import { useHealthCheck } from "@/hooks/useHealthCheck";
 import { Navbar } from "@/components/molecules/Navbar";
 import { Btn } from "@/components/atoms/Button";
-import { LatestDocs } from "@/components/organisms/LatestDocs";
+import { LatestDocsTable } from "@/components/organisms/LatestDocsTable";
 
 export const HomePage = () => {
   useHealthCheck();
@@ -28,7 +28,7 @@ export const HomePage = () => {
         </div>
       </header>
       <section className="mt-20">
-        <LatestDocs />
+        <LatestDocsTable />
       </section>
     </>
   );
