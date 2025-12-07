@@ -4,7 +4,9 @@ import redMoon from "@/assets/red-moon.svg";
 import grayMoon from "@/assets/gray-moon.svg";
 import rocketIcon from "@/assets/rocket.svg";
 
-const TimelineIcon: React.FC<{ type: "rocket" | "moon-gray" }> = ({ type }) => {
+const TimelineIcon: React.FC<{ type: "rocket" | "moon-gray" | "moon" }> = ({
+  type,
+}) => {
   if (type === "rocket") {
     return (
       <div className="flex items-center justify-center w-20 h-20">
@@ -49,10 +51,14 @@ export const Timeline: React.FC<{ items: ILegislationStep[] }> = ({
           </div>
 
           <div className="shrink-0">
-            <TimelineIcon type={item.isActive ? "rocket" : "moon-gray"} />
+            <TimelineIcon
+              type={
+                item.isActive ? "rocket" : item.isOmitted ? "moon-gray" : "moon"
+              }
+            />
           </div>
 
-          <div className="flex-1 pt-1">
+          <div className={`flex-1 pt-1 ml-[${item.isActive ? 0 : 30}px]`}>
             <h4 className="text-base font-semibold mb-1">{item.type}</h4>
 
             {item.description && (
