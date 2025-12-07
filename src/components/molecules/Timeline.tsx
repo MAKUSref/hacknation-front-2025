@@ -1,10 +1,15 @@
 import React from "react";
-import type { ILegislationStep } from "@/api/baseApi/legislation/types";
+import {
+  StepPlace,
+  type ILegislationStep,
+} from "@/api/baseApi/legislation/types";
 import redMoon from "@/assets/red-moon.svg";
 import grayMoon from "@/assets/gray-moon.svg";
 import rocketIcon from "@/assets/rocket.svg";
 
-const TimelineIcon: React.FC<{ type: "rocket" | "moon-gray" }> = ({ type }) => {
+const TimelineIcon: React.FC<{ type: "rocket" | "moon-gray" | "moon" }> = ({
+  type,
+}) => {
   if (type === "rocket") {
     return (
       <div className="flex items-center justify-center w-20 h-20">
@@ -28,6 +33,44 @@ const TimelineIcon: React.FC<{ type: "rocket" | "moon-gray" }> = ({ type }) => {
   );
 };
 
+const mapPlaceToIcon = (place: StepPlace) => {
+  switch (place) {
+    case "PREZYDENT":
+      return <TimelineIcon type={"rocket"} />;
+    case "SEJM":
+      return <TimelineIcon type={"moon-gray"} />;
+    case "SENAT":
+      return <TimelineIcon type={"moon"} />;
+    default:
+      return <TimelineIcon type={"moon-gray"} />;
+  }
+};
+
+const mapPlaceToBadge = (place: StepPlace) => {
+  switch (place) {
+    case "PREZYDENT":
+      return (
+        <span className="inline-block px-3 py-1 text-xs font-medium text-red-700 bg-red-100 rounded-full">
+          {place}
+        </span>
+      );
+    case "SEJM":
+      return (
+        <span className="inline-block px-3 py-1 text-xs font-medium text-green-700 bg-green-100 rounded-full">
+          {place}
+        </span>
+      );
+    case "SENAT":
+      return (
+        <span className="inline-block px-3 py-1 text-xs font-medium text-blue-700 bg-blue-100 rounded-full">
+          {place}
+        </span>
+      );
+    default:
+      return <></>;
+  }
+};
+
 export const Timeline: React.FC<{ items: ILegislationStep[] }> = ({
   items,
 }) => {
@@ -49,7 +92,13 @@ export const Timeline: React.FC<{ items: ILegislationStep[] }> = ({
           </div>
 
           <div className="shrink-0">
-            <TimelineIcon type={item.isActive ? "rocket" : "moon-gray"} />
+            {mapPlaceToIcon(
+              item.isActive || item.place === StepPlace.PREZYDENT
+                ? StepPlace.PREZYDENT
+                : item.isOmitted || item.place === StepPlace.SENAT
+                ? StepPlace.SENAT
+                : StepPlace.SEJM
+            )}
           </div>
 
           <div className="flex-1 pt-1">
@@ -59,11 +108,7 @@ export const Timeline: React.FC<{ items: ILegislationStep[] }> = ({
               <p className="text-sm text-gray-600 mb-2">{item.description}</p>
             )}
 
-            {item.place && (
-              <span className="inline-block px-3 py-1 text-xs font-medium text-green-700 bg-green-100 rounded-full">
-                {item.place}
-              </span>
-            )}
+            {item.place && mapPlaceToBadge(item.place)}
           </div>
         </div>
       ))}

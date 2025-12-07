@@ -9,9 +9,10 @@ import {
 import { Tag } from "@/components/atoms/Tag";
 import { SubscribeBtn } from "@/components/molecules/SubscribeBtn";
 import { Loader } from "@/components/molecules/Loader";
-import type {
-  ILegislationStep,
-  ILegislationStepsInfo,
+import {
+  StepPlace,
+  type ILegislationStep,
+  type ILegislationStepsInfo,
 } from "@/api/baseApi/legislation/types";
 
 const text = `
@@ -66,6 +67,14 @@ export const ProcessPage = () => {
     return mapTitle(legislation.steps, steps);
   }, [legislation, steps]);
 
+  const isOpinionFormAvailable = useMemo(
+    () =>
+      mappedItems.find(
+        (item) => item.isActive && item.place === StepPlace.PRE_SEJM
+      ),
+    [mappedItems]
+  );
+
   if (!legislation || !steps) {
     return <Loader />;
   }
@@ -118,17 +127,23 @@ export const ProcessPage = () => {
           <div className="flex flex-row gap-4 items-center mt-5">
             <div className="font-medium text-5xl">12</div>
             <div className="text-sm text-gray-600 max-w-[200px]">
-              Liczba osób, które podzieliły się swoją opinią
+              Liczba osób, które{" "}
+              {isOpinionFormAvailable ? "" : "w czasie trwania konsultacji"}{" "}
+              podzieliły się swoją opinią
             </div>
           </div>
-          <textarea
-            className="border-black border-2 rounded-xl px-5 py-3 mt-5 text-sm"
-            placeholder="Co sądzisz o projekcie?"
-            rows={8}
-          ></textarea>
-          <button className="bg-red-400 text-white p-3 rounded-4xl font-bold w-100 hover:cursor-pointer mt-5">
-            Wyślij swoją uwagę
-          </button>
+          {isOpinionFormAvailable && (
+            <>
+              <textarea
+                className="border-black border-2 rounded-xl px-5 py-3 mt-5 text-sm"
+                placeholder="Co sądzisz o projekcie?"
+                rows={8}
+              ></textarea>
+              <button className="bg-red-400 text-white p-3 rounded-4xl font-bold w-100 hover:cursor-pointer mt-5">
+                Wyślij swoją uwagę
+              </button>
+            </>
+          )}
         </div>
       </section>
     </section>
