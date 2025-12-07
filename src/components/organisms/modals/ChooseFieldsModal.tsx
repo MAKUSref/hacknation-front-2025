@@ -1,7 +1,6 @@
 import { FieldCheckbox } from "@/components/atoms/FieldCheckbox";
 import { useFieldsModal } from "@/contexts/ChooseFieldsModalContext";
 import { Modal } from "antd";
-import EducationIcon from "@/assets/education.svg";
 import { Btn } from "@/components/atoms/Button";
 import { LegislationTag } from "@/api/baseApi/legislation/types";
 import { useState } from "react";
@@ -46,27 +45,42 @@ export function ChooseFieldsModal() {
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           <FieldCheckbox
             name={LegislationTag.ALKOHOL}
-            src={EducationIcon}
             onChange={handleFieldChange}
           />
           <FieldCheckbox
-            name={LegislationTag.BUDOWNICTWO}
-            src={EducationIcon}
-            onChange={handleFieldChange}
-          />
-          <FieldCheckbox
-            name={LegislationTag.COMPLIANCE}
-            src={EducationIcon}
+            name={LegislationTag.ENERGETYKA}
             onChange={handleFieldChange}
           />
           <FieldCheckbox
             name={LegislationTag.COVID_19}
-            src={EducationIcon}
             onChange={handleFieldChange}
           />
           <FieldCheckbox
             name={LegislationTag.DANE_OSOBOWE}
-            src={EducationIcon}
+            onChange={handleFieldChange}
+          />
+          <FieldCheckbox
+            name={LegislationTag.INSTRUMENTY_FINANSOWE}
+            onChange={handleFieldChange}
+          />
+          <FieldCheckbox
+            name={LegislationTag.OCHRONA_SRODOWISKA}
+            onChange={handleFieldChange}
+          />
+          <FieldCheckbox
+            name={LegislationTag.ODPADY}
+            onChange={handleFieldChange}
+          />
+          <FieldCheckbox
+            name={LegislationTag.PRODUKTY_LECZNICZNE}
+            onChange={handleFieldChange}
+          />
+          <FieldCheckbox
+            name={LegislationTag.REKLAMA}
+            onChange={handleFieldChange}
+          />
+          <FieldCheckbox
+            name={LegislationTag.WYROBY_TYTONIOWE}
             onChange={handleFieldChange}
           />
         </div>

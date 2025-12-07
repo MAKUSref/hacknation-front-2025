@@ -6,13 +6,11 @@ import { LegislationTag } from "@/api/baseApi/legislation/types";
 type FieldCheckboxProps = {
   name: LegislationTag;
   active?: boolean;
-  src?: string;
   onChange?: (active: boolean, fieldName: LegislationTag) => void;
 };
 
 export function FieldCheckbox({
   name,
-  src,
   active = false,
   onChange,
 }: FieldCheckboxProps) {
@@ -31,7 +29,7 @@ export function FieldCheckbox({
       )}
       onClick={handleClick}
     >
-      {src && <LegislationIcon tag={name} />}
+      <LegislationIcon tag={name} />
       <p>{name}</p>
     </div>
   );
