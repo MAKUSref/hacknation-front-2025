@@ -139,7 +139,7 @@ export const ProcessPage = () => {
             społeczeństwa.
           </p>
           <div className="flex flex-row gap-4 items-center mt-5">
-            <div className="font-medium text-5xl">12</div>
+            <div className="font-medium text-5xl">{comments?.length || 0}</div>
             <div className="text-sm text-gray-600 max-w-[200px]">
               Liczba osób, które{" "}
               {isOpinionFormAvailable ? "" : "w czasie trwania konsultacji"}{" "}

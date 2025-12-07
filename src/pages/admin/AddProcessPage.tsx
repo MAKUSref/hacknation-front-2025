@@ -1,8 +1,31 @@
 import { Alert, Button, Input, Select, Upload } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { Btn } from "@/components/atoms/Button";
+// import { useState } from "react";
+// import {
+//   LegislationTag,
+//   type ILegislationProject,
+//   type ILegislationStep,
+// } from "@/api/baseApi/legislation/types";
 
 export function AddProcessPage() {
+  // const [processInfo, setProcessInfo] = useState<ILegislationProject>();
+
+  // const handleFileChange = () => {
+  //   setProcessInfo({
+  //     _id: "1hvbhb2",
+  //     title:
+  //       "Projekt założeń projektu ustawy o zdrowiu dzieci i młodzieży w wieku szkolnym",
+  //     applicant: "Minister Zdrowia",
+  //     description:
+  //       "Projekt ustawy mający na celu poprawę zdrowia dzieci i młodzieży poprzez wprowadzenie obowiązkowych badań profilaktycznych oraz programów edukacyjnych w szkołach.",
+  //     steps: [] as ILegislationStep[],
+  //     createdAt: new Date(),
+  //     updatedAt: new Date(),
+  //     tags: [LegislationTag.ZDROWIE],
+  //   });
+  // };
+
   return (
     <div className="my-10">
       <h4>Dodaj dokument</h4>
