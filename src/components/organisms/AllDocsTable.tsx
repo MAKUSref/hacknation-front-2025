@@ -4,7 +4,6 @@ import {
 } from "@/api/baseApi/legislation/legislationApi";
 import { Badge, Table } from "antd";
 import { useNavigate } from "react-router";
-import { Tag } from "../atoms/Tag";
 import dayjs from "dayjs";
 import { PATHS } from "@/router/paths";
 import { mapTitle } from "@/pages/legislative/ProcessPage";

@@ -2,7 +2,7 @@ import { FieldCheckbox } from "@/components/atoms/FieldCheckbox";
 import { useFieldsModal } from "@/contexts/ChooseFieldsModalContext";
 import { Modal } from "antd";
 import { Btn } from "@/components/atoms/Button";
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import { useAppDispatch } from "@/redux/hooks";
 import { setSelectedFields } from "@/redux/session/sessionSlice";
 import { useGetLegislationListQuery } from "@/api/baseApi/legislation/legislationApi";
