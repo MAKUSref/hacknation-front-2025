@@ -12,7 +12,7 @@ export function LoginButton() {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    login({ email: "test", password: "test" })
+    login({ email: "jan@example.com", password: "test" })
       .unwrap()
       .then((response) => {
         dispatch(setAccessToken(response.accessToken));
