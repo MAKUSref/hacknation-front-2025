@@ -17,7 +17,7 @@ const baseQuery = fetchBaseQuery({
 export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery,
-  tagTypes: ["self", "watch-list"],
+  tagTypes: ["self", "watch-list", "comments"],
   endpoints: (builder) => ({
     healthCheck: builder.query<{ status: string }, void>({
       query: () => API_ROUTES.HEALTH_CHECK,
