@@ -8,7 +8,7 @@ export function LogoutButton({ onClick }: { onClick?: () => void }) {
 
   return (
     <Btn
-      className="gap-2.5 px-5!"
+      className="gap-2.5 px-5! text-sm"
       variant="outline"
       onClick={() => {
         if (onClick) onClick();
@@ -16,7 +16,7 @@ export function LogoutButton({ onClick }: { onClick?: () => void }) {
       }}
     >
       <img src={UserIcon} width={25} alt="User icon" />
-      Konto
+      Wyloguj się
     </Btn>
   );
 }

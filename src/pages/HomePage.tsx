@@ -1,9 +1,20 @@
 import { useHealthCheck } from "@/hooks/useHealthCheck";
 import { Btn } from "@/components/atoms/Button";
 import { LatestDocsTable } from "@/components/organisms/LatestDocsTable";
+import { useNavigate } from "react-router";
+import { PATHS } from "@/router/paths";
+import { useFieldsModal } from "@/contexts/ChooseFieldsModalContext";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { useLoginMutation } from "@/api/baseApi/auth/authApi";
+import { setAccessToken } from "@/redux/session/sessionSlice";
 
 export const HomePage = () => {
   useHealthCheck();
+  const [login] = useLoginMutation();
+  const { accessToken } = useAppSelector((state) => state.session);
+  const { setOn } = useFieldsModal();
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   return (
     <>
@@ -19,8 +30,27 @@ export const HomePage = () => {
           przepisy, które kształtują nasze codzienne życie.
         </h5>
         <div className="flex flex-col gap-1">
-          <Btn className="md:min-w-[420px]">Ustaw Zainteresowania</Btn>
-          <p className="text-primary underline cursor-pointer p-2 m-2">
+          <Btn
+            className="md:min-w-[420px]"
+            onClick={() => {
+              if (accessToken) {
+                setOn();
+              } else {
+                login({ email: "jan@example.com", password: "test" })
+                  .unwrap()
+                  .then((response) => {
+                    dispatch(setAccessToken(response.accessToken));
+                    navigate(PATHS.EPUAP_LOGIN);
+                  });
+              }
+            }}
+          >
+            Ustaw Zainteresowania
+          </Btn>
+          <p
+            className="text-primary underline cursor-pointer p-2 m-2"
+            onClick={() => navigate(PATHS.ALL_PROCESSES)}
+          >
             Przejrzyj dokumenty legislacyjne
           </p>
         </div>

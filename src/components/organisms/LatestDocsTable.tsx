@@ -15,6 +15,7 @@ import { useAppSelector } from "@/redux/hooks";
 type LegislationWithId = { _id?: string; id?: string };
 
 export function LatestDocsTable() {
+  const { accessToken } = useAppSelector((state) => state.session);
   const { data, isLoading } = useGetLegislationListQuery();
   const { data: steps } = useGetLegislationStepsQuery();
 
@@ -39,7 +40,11 @@ export function LatestDocsTable() {
 
   return (
     <div className="flex flex-col gap-5">
-      <h6>Ostatnio uaktualniane dokumenty</h6>
+      {accessToken ? (
+        <h6>Polecone dla ciebie</h6>
+      ): (
+        <h6>Ostatnio uaktualniane dokumenty</h6>
+      )}
       <Table
         loading={isLoading}
         pagination={false}
