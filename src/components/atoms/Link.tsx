@@ -1,13 +1,24 @@
 import clsx from "clsx";
-import type { AnchorHTMLAttributes } from "react";
-import { useNavigate } from "react-router";
+import { useMemo, type AnchorHTMLAttributes } from "react";
+import { useLocation, useNavigate } from "react-router";
 
 type LinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
-  active?: boolean;
+  exact?: boolean;
 };
 
-export const Link = ({ active, className, ...linkProps }: LinkProps) => {
+export const Link = ({ exact = false, className, ...linkProps }: LinkProps) => {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const isActive = useMemo(() => {
+    if (!linkProps.href) return false;
+    const currentPath = location.pathname;
+    if (exact) {
+      return currentPath === linkProps.href;
+    } else {
+      return currentPath.startsWith(linkProps.href);
+    }
+  }, [exact, linkProps.href, location]);
 
   return (
     <a
@@ -20,7 +31,7 @@ export const Link = ({ active, className, ...linkProps }: LinkProps) => {
       }}
       className={clsx(
         "pb-2 -mb-2 cursor-pointer",
-        active && "border-b-2 border-secondary",
+        isActive && "border-b-2 border-secondary",
         className
       )}
     >
