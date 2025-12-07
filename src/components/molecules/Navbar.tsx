@@ -12,7 +12,7 @@ export function Navbar(props: React.HTMLAttributes<HTMLElement>) {
 
   return (
     <nav
-      className="p-2 w-full flex flex-wrap items-center gap-6 container fixed top-0 left-0 right-0 bg-white"
+      className="p-2 w-full flex flex-wrap items-center gap-6 container fixed top-0 left-0 right-0 bg-white z-50"
       {...props}
     >
       <div className="shrink-0">
